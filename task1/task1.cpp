@@ -22,11 +22,10 @@ template <typename T1, typename T2> typename T1::value_type quant(const T1& x, T
 int main(int argc, char *argv[])
 {
 	ifstream F(argv[1]);
-	vector<double> x;
-	string fl;
+	vector<float> x;
+	float fl;
 	while (F >> fl) {
-		double temp = atof(fl.c_str());
-		x.push_back(temp);
+		x.push_back(fl);
 	}
 	sort(x.begin(), x.end());
 	double av = accumulate(x.begin(), x.end(), 0.0) / x.size();
