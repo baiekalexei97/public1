@@ -1,4 +1,4 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -11,20 +11,18 @@ int main(int argc, char* argv[])
 	float s;
 	vector<vector<float>> v(5);
 	char* c = new char[255];
-	char buff;
+	char* buff = new char[15];
 	for (int i = 1; i <= 5; i++) {
-		buff = (char)(((int)'0') + i);
 		strcpy(c, argv[1]);
-		strcat(c, "\\Cash");
-		strncat(c, &buff, 1);
-		strcat(c,".txt");
+		sprintf(buff, "\\Cash%d.txt", i);
+		strcat(c, buff);
 		ifstream Cash(c);
 		while (Cash >> s) {
 			v[i-1].push_back(s);
 		}
 		Cash.close();
 	}
-	float max = 0.0;
+	long double max = 0.0;
 	int maxp = 0;
 	long double sum = 0.0;
 	for (int i = 0; i < 16; i++) {
@@ -32,7 +30,7 @@ int main(int argc, char* argv[])
 		sum += v[1][i];
 		sum += v[2][i];
 		sum += v[3][i];
-		sum	+= v[4][i];
+		sum += v[4][i];
 		if (sum > max) {
 			max = sum;
 			maxp = i+1;
@@ -41,5 +39,4 @@ int main(int argc, char* argv[])
 	}
 	cout << maxp << "\n";
 	return 0;
-
 }
