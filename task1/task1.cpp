@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <numeric>
+#include <cmath>
 #include <cstdlib>
 #include <iomanip>
 using namespace std;
