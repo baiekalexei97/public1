@@ -22,6 +22,7 @@ int main(int argc, char* argv[])
 		while (Cash >> s) {
 			v[i-1].push_back(s);
 		}
+		Cash.close();
 	}
 	float max = 0.0;
 	int maxp = 0;
