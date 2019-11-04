@@ -2,7 +2,6 @@
 #include <cstdlib>
 #include <vector>
 #include <fstream>
-#include <iomanip>
 using namespace std;
 
 int main(int argc, char* argv[])
@@ -13,20 +12,17 @@ int main(int argc, char* argv[])
 	while (F1 >> fl) {
 		quad.push_back(fl);
 	}
+	F1.close();
 	quad.push_back(quad[0]);
 	quad.push_back(quad[1]);
 
 	ifstream F2(argv[2]);
-	float s;
-	vector<float> dots;
-	while (F2 >> s) {
-		dots.push_back(s);
-	}
-
-	for (int i = 0; i < dots.size(); i += 2) {
+	float x, y;
+	while (!F2.eof()) {
+		F2 >> x >> y;
 		int dot = -1;
 		for (int j = 0; j < 8; j += 2) {
-			if (dots[i] == quad[j] && dots[i + 1] == quad[j + 1])
+			if (x == quad[j] && y == quad[j + 1])
 				dot = 0;
 		}
 		if (dot == 0) {
@@ -34,12 +30,12 @@ int main(int argc, char* argv[])
 			continue;
 		}
 		for (int j = 0; j < 8; j += 2) {
-			long double ax = dots[i] - quad[j];
-			long double ay = quad[j + 3] - quad[j + 1];
+			long double ax = x - quad[j];
+			long double by = quad[j + 3] - quad[j + 1];
 			long double bx = quad[j + 2] - quad[j];
-			long double by = dots[i + 1] - quad[j + 1];
-			long double d1 = ax * ay;
-			long double d2 = bx * by;
+			long double ay = y - quad[j + 1];
+			long double d1 = ax * by;
+			long double d2 = bx * ay;
 			long double d = d1 - d2;
 			if (d == 0.0) {
 				dot = 1;
@@ -59,5 +55,6 @@ int main(int argc, char* argv[])
 		else
 			cout << "2\n";
 	}
+	F2.close();
 	return 0;
 }
